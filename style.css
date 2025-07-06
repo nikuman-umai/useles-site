@@ -137,7 +137,7 @@ button {
     margin-top: 15px;
 }
 
-/* --- デバッグ用パスワード入力欄のスタイル（追加・変更箇所） --- */
+/* --- デバッグ用パスワード入力欄のスタイル --- */
 #debug-password-container {
     position: fixed; /* 画面に固定 */
     bottom: 20px; /* 下から20px */
