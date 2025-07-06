@@ -1,8 +1,4 @@
 // --- 豆知識データ ---
-// ここに「無駄知識」と「微益な豆知識」を記述します。
-// 実際にはもっとたくさん用意してください！
-// この配列を直接編集してGitHubにプッシュすることで、サイトの豆知識を更新します。
-
 const USELESS_TRIVIA = [
     "人間の鼻の穴は、常に片方ずつ交互に優位に呼吸している。約3〜4時間ごとに切り替わるが、ほとんどの人は気づかない。",
     "もし地球上の全ての砂粒を数えようとすると、一人で数え続けても約3000年以上かかる計算になる。",
@@ -28,20 +24,37 @@ const SLIGHTLY_USEFUL_TRIVIA = [
 // 無駄:微益の比率 (例: 5:1なので、6回に1回が微益)
 const USELESS_TO_SLIGHTLY_USEFUL_RATIO = 6;
 
+// デバッグ用パスワード (このパスワードはあなたしか知らない、安全なものに設定してください)
+const DEBUG_PASSWORD = "debug_password_2025_nikuman"; // ★★★ ここを好きなパスワードに変更してください！ ★★★
+
 // HTML要素の取得
 const triviaDisplay = document.getElementById('trivia-display');
 const getTriviaButton = document.getElementById('get-trivia-button');
 const submitTriviaButton = document.getElementById('submit-trivia-button');
 
+// 新しく追加するデバッグ用パスワード入力要素
+const debugPasswordInput = document.createElement('input');
+debugPasswordInput.type = 'password';
+debugPasswordInput.placeholder = 'デバッグパスワード';
+debugPasswordInput.style.marginTop = '15px'; // 見た目を調整
+debugPasswordInput.style.padding = '8px';
+debugPasswordInput.style.borderRadius = '5px';
+debugPasswordInput.style.border = '1px solid #ccc';
+debugPasswordInput.style.width = 'calc(100% - 20px)'; // 幅を調整
+debugPasswordInput.style.maxWidth = '250px';
+debugPasswordInput.style.display = 'block'; // ブロック要素にする
+debugPasswordInput.style.margin = '15px auto 0 auto'; // 中央寄せにする
+
 // FromZ.ai のPC用とスマホ用フォームのURLを定義
-// ★★★ここをあなたのFromZ.aiフォームのURLに置き換えてください★★★
 const FORMZU_PC_URL = "https://ws.formzu.net/fgen/S493420122/";
 const FORMZU_SP_URL = "https://ws.formzu.net/sfgen/S493420122/";
-
 
 // 最終表示日をローカルストレージに保存
 const LAST_SHOWN_DATE_KEY = 'lastShownDate';
 const LAST_SHOWN_TRIVIA_KEY = 'lastShownTrivia'; // 表示された豆知識も保存
+
+// デバッグモードの状態を保持するフラグ
+let isDebugMode = false;
 
 function getStoredData() {
     const lastShownDate = localStorage.getItem(LAST_SHOWN_DATE_KEY);
@@ -59,7 +72,6 @@ function getRandomTrivia() {
     let triviaText;
     let triviaType;
 
-    // 6回に1回の確率で微益な豆知識を選択
     if (Math.floor(Math.random() * USELESS_TO_SLIGHTLY_USEFUL_RATIO) === 0) {
         triviaType = "微益";
         triviaText = SLIGHTLY_USEFUL_TRIVIA[Math.floor(Math.random() * SLIGHTLY_USEFUL_TRIVIA.length)];
@@ -75,18 +87,23 @@ function showDailyTrivia() {
     const today = new Date().toISOString().slice(0, 10); // "YYYY-MM-DD"形式
     const { lastShownDate, lastShownTrivia } = getStoredData();
 
-    if (lastShownDate === today) {
-        // 今日の知識が既に表示されている場合
+    // デバッグモードが有効な場合、または今日の知識がまだ表示されていない場合
+    if (isDebugMode || lastShownDate !== today) {
+        const { text, type } = getRandomTrivia();
+        triviaDisplay.textContent = `【今日の${type}知識】\n\n${text}`;
+        getTriviaButton.textContent = "次の知識を解禁"; // デバッグモード中はボタンを「次の知識を解禁」に
+        
+        if (!isDebugMode) { // デバッグモードでない場合のみ、日付と知識を保存してボタンを無効化
+            updateStoredData(today, text);
+            getTriviaButton.disabled = true;
+            getTriviaButton.textContent = "明日また来るのだ";
+        }
+
+    } else {
+        // 今日の知識が既に表示されており、デバッグモードでない場合
         triviaDisplay.textContent = `今日の知識はすでに表示されました。\n明日またお越しください！\n\n【今日の知識】\n${lastShownTrivia}`;
         getTriviaButton.disabled = true;
         getTriviaButton.textContent = "明日に期待";
-    } else {
-        // 今日の知識を新たに表示する場合
-        const { text, type } = getRandomTrivia();
-        triviaDisplay.textContent = `【今日の${type}知識】\n\n${text}`;
-        getTriviaButton.disabled = true;
-        getTriviaButton.textContent = "明日また来るのだ";
-        updateStoredData(today, text); // 豆知識と日付を保存
     }
 }
 
@@ -97,25 +114,47 @@ getTriviaButton.addEventListener('click', showDailyTrivia);
 
 // 「豆知識を投稿する」ボタン
 submitTriviaButton.addEventListener('click', () => {
-    let targetFormUrl = FORMZU_PC_URL; // デフォルトはPC用
+    let targetFormUrl = FORMZU_PC_URL;
 
-    // ユーザーエージェントでモバイルデバイスかどうかを判別
     const isMobile = /Android|webOS|iPhone|iPad|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
     if (isMobile) {
         targetFormUrl = FORMZU_SP_URL;
     }
 
-    // 新しいタブで適切なFromZ.aiフォームのURLを開く
     window.open(targetFormUrl, '_blank');
 });
+
+// パスワード入力欄でのEnterキー押下イベント
+debugPasswordInput.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+        if (debugPasswordInput.value === DEBUG_PASSWORD) {
+            isDebugMode = true; // デバッグモードを有効にする
+            debugPasswordInput.style.display = 'none'; // パスワード入力欄を非表示にする
+            triviaDisplay.textContent = "デバッグモードが有効になりました！\n\n「知識を解禁する」ボタンで何度でも新しい豆知識を表示できます。";
+            getTriviaButton.disabled = false; // ボタンを再度有効にする
+            getTriviaButton.textContent = "知識を解禁する"; // ボタンのテキストを初期状態に戻す
+            console.log("Debug mode activated!"); // コンソールにも表示
+            alert("デバッグモードが有効になりました！\n「知識を解禁する」ボタンを何度でも押せます。"); // ユーザーに通知
+        } else {
+            alert("パスワードが間違っています。");
+            debugPasswordInput.value = ''; // 入力値をクリア
+        }
+    }
+});
+
 
 // ページロード時の初期チェック
 window.onload = () => {
     const today = new Date().toISOString().slice(0, 10);
     const { lastShownDate, lastShownTrivia } = getStoredData();
 
-    // ページロード時に既に今日の知識が表示済みであれば、ボタンを無効化し表示内容をセット
+    // ページにデバッグ用パスワード入力欄を追加
+    // triviaDisplay の直後、または getTriviaButton の直後など、適切な場所に追加してください
+    // ここでは getTriviaButton の直後に追加します
+    getTriviaButton.parentNode.insertBefore(debugPasswordInput, getTriviaButton.nextSibling);
+
+
     if (lastShownDate === today) {
         triviaDisplay.textContent = `今日の知識はすでに表示されました。\n明日またお越しください！\n\n【今日の知識】\n${lastShownTrivia}`;
         getTriviaButton.disabled = true;
