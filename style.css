@@ -138,7 +138,7 @@ button {
   margin-top: 15px;
 }
 
-/* パスワード欄 */
+/* --- パスワード入力欄（常時表示） --- */
 #debug-password-container {
   position: fixed;
   bottom: 20px;
@@ -148,10 +148,9 @@ button {
   border-radius: 8px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   z-index: 1000;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-  transform: translateY(10px);
+  opacity: 1;             /* 常に表示 */
+  pointer-events: auto;   /* 操作可能 */
+  transform: translateY(0); /* 位置固定 */
 }
 
 #debug-password-container label {
@@ -177,27 +176,9 @@ button {
   border-color: #4caf50;
 }
 
-/* ホバー用トリガー */
+/* --- 不要なトリガーは非表示にする --- */
 #hover-trigger {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 40px;
-  height: 40px;
-  background-color: #ccc;
-  border-radius: 50%;
-  cursor: pointer;
-  z-index: 999;
-  opacity: 0.2;
-  transition: opacity 0.3s ease;
-}
-
-/* ここが変更ポイント！ トリガーかパスワード欄のどちらかにマウスが乗っている間、表示 */
-#hover-trigger:hover + #debug-password-container,
-#debug-password-container:hover {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateY(0);
+  display: none;
 }
 
 /* アニメーション */
