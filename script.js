@@ -25,7 +25,7 @@ const SLIGHTLY_USEFUL_TRIVIA = [
 const USELESS_TO_SLIGHTLY_USEFUL_RATIO = 6;
 
 // デバッグ用パスワード (このパスワードはあなたしか知らない、安全なものに設定してください)
-const DEBUG_PASSWORD = "debug_password_2025_nikuman"; // ★★★ ここを好きなパスワードに変更してください！ ★★★
+const DEBUG_PASSWORD = "zz939721"; // ★★★ ここを「zz939721」に変更しました！ ★★★
 
 // HTML要素の取得
 const triviaDisplay = document.getElementById('trivia-display');
