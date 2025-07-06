@@ -1,0 +1,210 @@
+/* 全体のリセットと基本設定 */
+body {
+    font-family: 'Noto Sans JP', 'Segoe UI', 'Meiryo UI', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0; /* 明るい背景 */
+    color: #333;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* コンテナ */
+.container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); /* 影を強調 */
+    text-align: center;
+    max-width: 90%;
+    width: 600px; /* PCでの幅を少し広げる */
+    box-sizing: border-box; /* パディングを含める */
+    animation: fadeIn 1s ease-out; /* 読み込み時のフェードイン */
+}
+
+/* 見出し */
+h1 {
+    color: #FFC107; /* 金塊っぽい強調色 */
+    margin-bottom: 25px;
+    font-size: 2.8em; /* 大きめ */
+    font-weight: 700;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+h2 {
+    color: #4CAF50; /* 緑系の投稿セクション色 */
+    margin-top: 40px;
+    margin-bottom: 20px;
+    font-size: 2.2em;
+    font-weight: 700;
+}
+
+/* 豆知識表示エリア */
+#trivia-display {
+    min-height: 120px; /* 表示領域を確保 */
+    margin-bottom: 30px;
+    font-size: 1.3em;
+    line-height: 1.7;
+    background-color: #e8f5e9; /* 薄い緑背景 */
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px dashed #81C784; /* ダッシュ線 */
+    display: flex; /* 中央寄せ */
+    align-items: center;
+    justify-content: center;
+    word-break: break-word;
+    white-space: pre-wrap; /* 改行を有効にする */
+    font-weight: 400;
+}
+
+/* ボタン共通スタイル */
+button {
+    color: white;
+    border: none;
+    padding: 15px 35px;
+    font-size: 1.4em;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease, box-shadow 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+/* 「知識を解禁する」ボタン */
+#get-trivia-button {
+    background-color: #FFC107; /* 金塊っぽい色 */
+}
+
+#get-trivia-button:hover {
+    background-color: #FFA000;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+#get-trivia-button:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+#get-trivia-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+
+/* 「あああああっぁ…」メッセージ (今回は表示されないが、スタイルは残しておく) */
+#aahhh-message {
+    color: #777;
+    margin-top: 25px;
+    font-style: italic;
+    font-size: 1.1em;
+    animation: pulse 2s infinite; /* 少し脈打つアニメーション */
+}
+
+.hidden {
+    display: none;
+}
+
+/* 投稿セクション */
+.form-section {
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 2px dashed #ddd; /* 区切り線 */
+    text-align: center;
+}
+
+.form-section p {
+    font-size: 1.1em;
+    color: #555;
+    margin-bottom: 25px;
+}
+
+/* 「豆知識を投稿する」ボタン */
+#submit-trivia-button {
+    background-color: #17A2B8; /* 青系の色 */
+    margin-top: 20px;
+}
+
+#submit-trivia-button:hover {
+    background-color: #138496;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+#submit-trivia-button:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.small-text {
+    font-size: 0.9em;
+    color: #888;
+    margin-top: 15px;
+}
+
+/* アニメーション */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.03); opacity: 0.8; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* レスポンシブデザイン（スマホ向け調整） */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+        margin: 15px; /* マージン追加 */
+    }
+
+    h1 {
+        font-size: 2.2em;
+        margin-bottom: 20px;
+    }
+
+    h2 {
+        font-size: 1.8em;
+    }
+
+    #trivia-display {
+        font-size: 1.1em;
+        min-height: 100px;
+        padding: 15px;
+    }
+
+    button {
+        padding: 12px 25px;
+        font-size: 1.2em;
+    }
+
+    .form-section p {
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.8em;
+    }
+    h2 {
+        font-size: 1.5em;
+    }
+    #trivia-display {
+        font-size: 1em;
+        min-height: 80px;
+    }
+    button {
+        font-size: 1.1em;
+        padding: 10px 20px;
+    }
+}
