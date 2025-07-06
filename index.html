@@ -1,35 +1,41 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>知識の無駄箱（たまに金塊）</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>知識の無駄箱（たまに金塊）</title>
+  <link rel="stylesheet" href="style.css" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
 </head>
 <body>
-    <div class="container">
-        <h1>今日の知識</h1>
-        <p id="trivia-display">「知識を解禁する」ボタンを押して、今日の知識を受け取るのだ。</p>
-        <button id="get-trivia-button">知識を解禁する</button>
-        
-        <hr>
+  <div class="container">
+    <h1>今日の知識</h1>
+    <p id="trivia-display">
+      「知識を解禁する」ボタンを押して、今日の知識を受け取るのだ。
+    </p>
+    <button id="get-trivia-button">知識を解禁する</button>
 
-        <h2>知識を投稿する</h2>
-        <div class="form-section">
-            <p>あなたの知っている最高の無駄知識、あるいは微益な豆知識を共有してください！</p>
-            <button id="submit-trivia-button">豆知識を投稿する</button>
-            <p class="small-text">※別サイト（FromZ.aiフォーム）へ移動します。</p>
-        </div>
+    <hr />
+
+    <h2>知識を投稿する</h2>
+    <div class="form-section">
+      <p>
+        あなたの知っている最高の無駄知識、あるいは微益な豆知識を共有してください！
+      </p>
+      <button id="submit-trivia-button">豆知識を投稿する</button>
+      <p class="small-text">※別サイト（FromZ.aiフォーム）へ移動します。</p>
     </div>
+  </div>
 
-    <!-- ✅ ホバーで表示されるパスワード欄（順番が重要） -->
-    <div id="hover-trigger" title="パスワード入力欄を表示"></div>
-    <div id="debug-password-container">
-        <label for="passwordInput">わすわーど</label>
-        <input id="passwordInput" type="password" placeholder="わすわーど">
-    </div>
+  <!-- 常時表示のパスワード入力欄 -->
+  <div id="debug-password-container">
+    <label for="passwordInput">わすわーど</label>
+    <input id="passwordInput" type="password" placeholder="わすわーど" />
+  </div>
 
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
