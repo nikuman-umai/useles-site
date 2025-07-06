@@ -1,43 +1,49 @@
 // --- 豆知識データ ---
+// ここに「無駄知識」と「微益な豆知識」を記述します。
+// 健全版として、より一般向けで安全な内容に調整しました。
 const USELESS_TRIVIA = [
-    "人間の鼻の穴は、常に片方ずつ交互に優位に呼吸している。約3〜4時間ごとに切り替わるが、ほとんどの人は気づかない。",
-    "もし地球上の全ての砂粒を数えようとすると、一人で数え続けても約3000年以上かかる計算になる。",
-    "月の光は、地球に届くまでに約1.3秒かかる。そのため、私たちが見ている月は常に1.3秒前の姿である。",
-    "コアラは一日に20時間近く眠るが、その理由の多くはユーカリの葉の栄養価が低すぎて、エネルギーを節約するためである。",
-    "世界で最も大きな雪の結晶は、1887年にアメリカのモンタナ州で観測されたもので、直径約38センチメートルだったと記録されている。",
-    "一般的なシャープペンシルの芯1本で、約50kmの線を書くことができる。ただし、途中で折れたり、紙との摩擦で消耗するため、実際にそこまで書き続けることは不可能である。",
-    "もし地球上の全ての昆虫を数えようとすると、一秒に1匹数えても数兆年かかるだろう。そして、その間に新しい昆虫が生まれ続ける。",
-    "世界で最も大きなコンクリートの塊は、中国の三峡ダムである。しかし、そのコンクリートのわずか数ミリを削り取ったとしても、地球の自転には全く影響しない。"
+    "パンダの赤ちゃんは生まれてくる時、バターくらいの大きさしかない。",
+    "世界で最も使われている名前は「ムハンマド」である。",
+    "ハチドリは後ろ向きに飛ぶことができる唯一の鳥である。",
+    "人間の体内で最も硬い部分はエナメル質（歯）である。",
+    "キリンの舌はとても長く、約45センチメートルもある。自分の耳を掃除できるほどだ。",
+    "レモンはイチゴよりも多くの糖分を含んでいる。",
+    "オオカミの遠吠えは、群れの仲間とのコミュニケーションだけでなく、縄張りを主張するためにも行われる。",
+    "ペンギンは膝を持っているが、分厚い羽毛と独特の歩き方のため普段は見えない。",
+    "バナナは、木にぶら下がっている時は上向きに成長する。",
+    "ブタは空を見上げることができない体の構造をしている。"
 ];
 
 const SLIGHTLY_USEFUL_TRIVIA = [
-    "スマートフォンの画面がフリーズして操作不能になった場合、電源ボタンと音量下げるボタン（または上げるボタン）を同時に10秒以上長押しすると、強制的に再起動できることが多い。ただし、機種によっては異なる。",
-    "調理中に玉ねぎを切って涙が出るときは、切る前に玉ねぎを冷蔵庫で30分ほど冷やすと、刺激成分の揮発を抑えられ、涙が出にくくなる。ただし、冷やしすぎると風味が落ちる場合がある。",
-    "靴紐がほどけやすいと感じるなら、通常の蝶々結びのあと、もう一度だけ紐をクロスさせて結ぶと、ほどけにくくなる（二重結びの一種）。ただし、見た目が少しごつくなることもある。",
-    "古くなった新聞紙は、窓ガラスを拭くのに非常に効果的で、繊維が残らずピカピカになる。ただし、インクが手に付くので手袋をした方が良い。",
-    "災害時などで停電した際、スマートフォンのライトを水の入ったペットボトルに当てることで、簡易的なランタンとして部屋を明るくできる。ただし、光量は限られる。",
-    "段ボール箱を開ける際、カッターがない場合は、定規や硬貨の縁で強く押し付けると、比較的きれいに破ることができる。ただし、手が滑らないように注意すること。",
-    "電子レンジで冷めたピザを温め直す際、一緒に小さな耐熱性のコップに水を入れて温めると、ピザが乾燥しにくく、生地がもちもちになる。ただし、効果は限定的かもしれない。",
-    "油性ペンで書いてしまったホワイトボードの落書きは、アルコール消毒液や除光液を布に含ませて拭くと落とせる場合がある。ただし、ボードの素材によっては跡が残る可能性もあるので、目立たない場所で試すこと。"
+    "スマートフォンの充電ケーブルをきれいにまとめるには、マジックテープやケーブルタイを使うと絡まりを防げる。",
+    "玉ねぎを切る前に冷蔵庫で冷やすと、刺激成分の揮発が抑えられ、涙が出にくくなることがある。",
+    "コーヒーや紅茶を飲む際に、カップの底に少しだけ塩を加えると、苦味が和らぎ、風味が引き立つことがある。",
+    "靴の臭いが気になる場合、中に重曹を少量入れた布袋を一晩入れておくと、消臭効果が期待できる。",
+    "災害時などで停電した際、スマートフォンのライトを水の入ったペットボトルに当てることで、簡易的なランタンとして部屋を明るくできる。",
+    "古くなった歯ブラシは、細かい隙間やタイルの目地、シンク周りの掃除に再利用できる。",
+    "電子レンジで温めた食べ物が熱すぎるときは、数分待つか、全体を軽くかき混ぜると均一に冷める。",
+    "油性の汚れがついた衣類には、食器用洗剤を直接塗って軽く揉み、しばらく置いてから洗濯すると落ちやすくなる。",
+    "スマートフォンで写真を撮る際、フラッシュを使うと光が強すぎて不自然になる場合があるため、自然光を最大限に活用するか、反射板を使うと良い。",
+    "乾電池の残量が気になる時、低い高さから落としてみて、すぐに倒れずに立つものは残量が多い傾向がある。（※完全に正確な方法ではない）"
 ];
 
 // 無駄:微益の比率 (例: 5:1なので、6回に1回が微益)
 const USELESS_TO_SLIGHTLY_USEFUL_RATIO = 6;
 
 // デバッグ用パスワード
-const DEBUG_PASSWORD = "zz939721"; // ★あなたのパスワードを設定してください★
+const DEBUG_PASSWORD = "zz939721"; // あなたのパスワードを設定してください
 
 // HTML要素の取得
 const triviaDisplay = document.getElementById('trivia-display');
 const getTriviaButton = document.getElementById('get-trivia-button');
 const submitTriviaButton = document.getElementById('submit-trivia-button');
 
-// --- デバッグ用パスワード入力要素の作成と追加（変更箇所） ---
+// --- デバッグ用パスワード入力要素の作成と追加 ---
 const debugPasswordContainer = document.createElement('div');
 debugPasswordContainer.id = 'debug-password-container';
 
 const debugPasswordLabel = document.createElement('label');
-debugPasswordLabel.textContent = 'Login:'; // または「Debug Pw:」など
+debugPasswordLabel.textContent = 'Login:';
 debugPasswordLabel.htmlFor = 'debug-password-input';
 
 const debugPasswordInput = document.createElement('input');
@@ -47,7 +53,7 @@ debugPasswordInput.placeholder = 'パスワード';
 
 debugPasswordContainer.appendChild(debugPasswordLabel);
 debugPasswordContainer.appendChild(debugPasswordInput);
-document.body.appendChild(debugPasswordContainer); // bodyの直下に追加
+document.body.appendChild(debugPasswordContainer);
 
 // FromZ.ai のPC用とスマホ用フォームのURLを定義
 const FORMZU_PC_URL = "https://ws.formzu.net/fgen/S493420122/";
@@ -157,9 +163,6 @@ debugPasswordInput.addEventListener('focus', () => {
 window.onload = () => {
     const today = new Date().toISOString().slice(0, 10);
     const { lastShownDate, lastShownTrivia } = getStoredData();
-
-    // 以前のdebugPasswordInputの追加は削除。新しいコンテナ方式に。
-    // getTriviaButton.parentNode.insertBefore(debugPasswordInput, getTriviaButton.nextSibling);
 
     if (lastShownDate === today) {
         triviaDisplay.textContent = `今日の知識はすでに表示されました。\n明日またお越しください！\n\n【今日の知識】\n${lastShownTrivia}`;
