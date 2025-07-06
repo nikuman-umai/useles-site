@@ -34,6 +34,7 @@ const getTriviaButton = document.getElementById('get-trivia-button');
 const submitTriviaButton = document.getElementById('submit-trivia-button');
 
 // FromZ.ai のPC用とスマホ用フォームのURLを定義
+// ★★★ここをあなたのFromZ.aiフォームのURLに置き換えてください★★★
 const FORMZU_PC_URL = "https://ws.formzu.net/fgen/S493420122/";
 const FORMZU_SP_URL = "https://ws.formzu.net/sfgen/S493420122/";
 
@@ -99,7 +100,7 @@ submitTriviaButton.addEventListener('click', () => {
     let targetFormUrl = FORMZU_PC_URL; // デフォルトはPC用
 
     // ユーザーエージェントでモバイルデバイスかどうかを判別
-    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    const isMobile = /Android|webOS|iPhone|iPad|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
     if (isMobile) {
         targetFormUrl = FORMZU_SP_URL;
