@@ -24,26 +24,30 @@ const SLIGHTLY_USEFUL_TRIVIA = [
 // 無駄:微益の比率 (例: 5:1なので、6回に1回が微益)
 const USELESS_TO_SLIGHTLY_USEFUL_RATIO = 6;
 
-// デバッグ用パスワード (このパスワードはあなたしか知らない、安全なものに設定してください)
-const DEBUG_PASSWORD = "zz939721"; // ★★★ ここを「zz939721」に変更しました！ ★★★
+// デバッグ用パスワード
+const DEBUG_PASSWORD = "zz939721"; // ★あなたのパスワードを設定してください★
 
 // HTML要素の取得
 const triviaDisplay = document.getElementById('trivia-display');
 const getTriviaButton = document.getElementById('get-trivia-button');
 const submitTriviaButton = document.getElementById('submit-trivia-button');
 
-// 新しく追加するデバッグ用パスワード入力要素
+// --- デバッグ用パスワード入力要素の作成と追加（変更箇所） ---
+const debugPasswordContainer = document.createElement('div');
+debugPasswordContainer.id = 'debug-password-container';
+
+const debugPasswordLabel = document.createElement('label');
+debugPasswordLabel.textContent = 'Login:'; // または「Debug Pw:」など
+debugPasswordLabel.htmlFor = 'debug-password-input';
+
 const debugPasswordInput = document.createElement('input');
 debugPasswordInput.type = 'password';
-debugPasswordInput.placeholder = 'デバッグパスワード';
-debugPasswordInput.style.marginTop = '15px'; // 見た目を調整
-debugPasswordInput.style.padding = '8px';
-debugPasswordInput.style.borderRadius = '5px';
-debugPasswordInput.style.border = '1px solid #ccc';
-debugPasswordInput.style.width = 'calc(100% - 20px)'; // 幅を調整
-debugPasswordInput.style.maxWidth = '250px';
-debugPasswordInput.style.display = 'block'; // ブロック要素にする
-debugPasswordInput.style.margin = '15px auto 0 auto'; // 中央寄せにする
+debugPasswordInput.id = 'debug-password-input';
+debugPasswordInput.placeholder = 'パスワード';
+
+debugPasswordContainer.appendChild(debugPasswordLabel);
+debugPasswordContainer.appendChild(debugPasswordInput);
+document.body.appendChild(debugPasswordContainer); // bodyの直下に追加
 
 // FromZ.ai のPC用とスマホ用フォームのURLを定義
 const FORMZU_PC_URL = "https://ws.formzu.net/fgen/S493420122/";
@@ -130,7 +134,8 @@ debugPasswordInput.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
         if (debugPasswordInput.value === DEBUG_PASSWORD) {
             isDebugMode = true; // デバッグモードを有効にする
-            debugPasswordInput.style.display = 'none'; // パスワード入力欄を非表示にする
+            debugPasswordContainer.classList.remove('visible'); // コンテナを非表示にする
+            debugPasswordContainer.style.pointerEvents = 'none'; // イベントも無効にする
             triviaDisplay.textContent = "デバッグモードが有効になりました！\n\n「知識を解禁する」ボタンで何度でも新しい豆知識を表示できます。";
             getTriviaButton.disabled = false; // ボタンを再度有効にする
             getTriviaButton.textContent = "知識を解禁する"; // ボタンのテキストを初期状態に戻す
@@ -143,17 +148,18 @@ debugPasswordInput.addEventListener('keydown', (event) => {
     }
 });
 
+// デバッグパスワード入力欄にフォーカスが当たったら表示
+debugPasswordInput.addEventListener('focus', () => {
+    debugPasswordContainer.classList.add('visible');
+});
 
 // ページロード時の初期チェック
 window.onload = () => {
     const today = new Date().toISOString().slice(0, 10);
     const { lastShownDate, lastShownTrivia } = getStoredData();
 
-    // ページにデバッグ用パスワード入力欄を追加
-    // triviaDisplay の直後、または getTriviaButton の直後など、適切な場所に追加してください
-    // ここでは getTriviaButton の直後に追加します
-    getTriviaButton.parentNode.insertBefore(debugPasswordInput, getTriviaButton.nextSibling);
-
+    // 以前のdebugPasswordInputの追加は削除。新しいコンテナ方式に。
+    // getTriviaButton.parentNode.insertBefore(debugPasswordInput, getTriviaButton.nextSibling);
 
     if (lastShownDate === today) {
         triviaDisplay.textContent = `今日の知識はすでに表示されました。\n明日またお越しください！\n\n【今日の知識】\n${lastShownTrivia}`;
